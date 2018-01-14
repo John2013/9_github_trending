@@ -2,7 +2,7 @@ import requests
 import datetime
 
 
-def get_trending_repositories(top_size):
+def get_trending_repositories(top_size=500):
     date = (datetime.datetime.today() - datetime.timedelta(7)).strftime(
         "%Y-%m-%d"
     )
@@ -31,7 +31,8 @@ def get_open_issues_amount(repo_owner, repo_name):
 
 
 if __name__ == '__main__':
-    repositories = get_trending_repositories(500)
+
+    repositories = get_trending_repositories()
 
     print("Популярные проекты за последнюю неделю:")
     for repository in repositories:
