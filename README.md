@@ -1,6 +1,7 @@
 # Github Trends
 
-[TODO. There will be project description]
+Prints trending [github.com](https://github.com) repositories of the
+week and their issues_amounts
 
 # Project Goals
 
