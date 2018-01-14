@@ -3,9 +3,10 @@ import datetime
 
 
 def get_trending_repositories(top_size=500):
-    date = (datetime.datetime.today() - datetime.timedelta(7)).strftime(
-        "%Y-%m-%d"
-    )
+    days_count = 7
+    date = (datetime.datetime.today() - datetime.timedelta(
+        days_count)
+    ).strftime("%Y-%m-%d")
     repositories = requests.get(
         'https://api.github.com/search/repositories',
         {
@@ -18,13 +19,14 @@ def get_trending_repositories(top_size=500):
 
 
 def get_open_issues_amount(repo_owner, repo_name):
+    success_status = 200
     issues = requests.get(
         'https://api.github.com/repos/{owner}/{repo}/issues'.format(
             owner=repo_owner,
             repo=repo_name
         )
     )
-    if int(issues.status_code) == 200:
+    if int(issues.status_code) == success_status:
         return len(issues.json())
     else:
         return "неизвестно ({})".format(issues.json()['message'])
