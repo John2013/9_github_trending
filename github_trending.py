@@ -10,7 +10,7 @@ def get_trending_repositories():
     repositories = requests.get(
         'https://api.github.com/search/repositories',
         {
-            "q": "created:{}".format(date_from),
+            "q": "created:>{}".format(date_from),
             "sort": "stars",
             "per_page": "20"
         }
