@@ -7,7 +7,7 @@ def get_trending_repositories(repositories_count=20):
     date_from = (datetime.datetime.today() - datetime.timedelta(
         days_count
     )).strftime("%Y-%m-%d")
-    repositories = requests.get(
+    response = requests.get(
         'https://api.github.com/search/repositories',
         {
             "q": "created:>{}".format(date_from),
@@ -15,18 +15,18 @@ def get_trending_repositories(repositories_count=20):
             "per_page": repositories_count
         }
     )
-    return repositories.json()['items']
+    return response.json()['items']
 
 
 def get_open_issues_amount(repo_owner, repo_name):
-    issues = requests.get(
+    response = requests.get(
         'https://api.github.com/repos/{owner}/{repo}/issues'.format(
             owner=repo_owner,
             repo=repo_name
         )
     )
-    if issues.ok:
-        return len(issues.json())
+    if response.ok:
+        return len(response.json())
     else:
         return None
 
