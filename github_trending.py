@@ -2,7 +2,7 @@ import requests
 import datetime
 
 
-def get_trending_repositories():
+def get_trending_repositories(repositories_count=20):
     days_count = 7
     date_from = (datetime.datetime.today() - datetime.timedelta(
         days_count
@@ -12,7 +12,7 @@ def get_trending_repositories():
         {
             "q": "created:>{}".format(date_from),
             "sort": "stars",
-            "per_page": "20"
+            "per_page": repositories_count
         }
     )
     return repositories.json()['items']
